@@ -1,20 +1,11 @@
-from urllib.parse import unquote
+import uvicorn
+from fastapi import FastAPI
 
-from fastapi import FastAPI, HTTPException
-import validators
-
-from config import settings
-
+from app.routers import url, persona
 
 app = FastAPI()
+app.include_router(url.router)
+app.include_router(persona.router)
 
-
-@app.get("/urlsubmit/{url}")
-async def urlsubmit(url: str):
-    unquoted_url = unquote(url)
-    url_valid = bool(validators.url(unquoted_url))
-
-    if not url_valid:
-        raise HTTPException(status_code=400, detail="URL is not valid")
-
-    return {"message": f"url: {unquoted_url}", "url_valid": url_valid, "CHATGPT_API_KEY": settings.CHATGPT_API_KEY}
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

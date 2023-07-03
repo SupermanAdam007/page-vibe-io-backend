@@ -1,9 +1,9 @@
-from pydantic import BaseSettings, Field
+from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
     app_name: str = "PageVibe API"
-    CHATGPT_API_KEY: str
+    OPENAI_API_KEY: str
 
 
 settings = Settings()

@@ -1,5 +1,9 @@
+black==23.3.0
+beautifulsoup4==4.12.2
 fastapi==0.99.1
+openai==0.27.8
 pydantic==1.10.10
 python-dotenv==1.0.0
+requests
 uvicorn==0.22.0
 validators==0.20.0
