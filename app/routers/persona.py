@@ -14,16 +14,16 @@ async def get_persona(persona_id: int):
     return {"error": "Persona not found"}
 
 
-@router.get("/personas/")
-async def list_personas():
-    return constants.predefined_personas
+# @router.get("/personas/")
+# async def list_personas():
+#     return constants.predefined_personas
 
 
 @router.get("/personas/constants/")
 async def values():
     return {
         "predefined_decision_making_factors": constants.predefined_decision_making_factors,
-        "predefined_communication_styles": constants.predefined_communication_styles,
+        "predefined_communication_style": constants.predefined_communication_style,
         "predefined_user_experience_expectations": constants.predefined_user_experience_expectations,
         "predefined_personas": constants.predefined_personas,
         "predefined_questions": constants.predefined_questions,

@@ -29,7 +29,7 @@ predefined_decision_making_factors = [
     "Past experiences with the brand or product",
 ]
 
-predefined_communication_styles = [
+predefined_communication_style = [
     "In-person",
     "Phone calls",
     "Email",
@@ -75,8 +75,10 @@ predefined_user_experience_expectations = {
 predefined_personas = [
     Persona(
         id=1,
+        avatar="/personas/Thinking face-rafiki.png",
         age=25,
         gender="Male",
+        name="Adam",
         occupation="Digital Marketer",
         education_level=8,
         income_level=7,
@@ -100,8 +102,10 @@ predefined_personas = [
     ),
     Persona(
         id=2,
+        avatar="/personas/Judge-cuate.png",
         age=70,
         gender="Female",
+        name="Lisa",
         occupation="Retired",
         education_level=4,
         income_level=5,
@@ -129,9 +133,11 @@ predefined_personas = [
     ),
     Persona(
         id=3,
+        avatar="/personas/Programmer-bro.png",
         age=35,
-        gender="Non-binary",
-        occupation="Consultant",
+        gender="Male",
+        name="Peter",
+        occupation="Software Engineer",
         education_level=9,
         income_level=9,
         tech_proficiency=8,
@@ -159,7 +165,9 @@ predefined_personas = [
     Persona(
         id=4,
         age=30,
+        avatar="/personas/Work life balance-amico.png",
         gender="Female",
+        name="Isabella",
         occupation="Homemaker",
         education_level=6,
         income_level=6,

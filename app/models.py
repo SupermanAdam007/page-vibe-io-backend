@@ -36,7 +36,9 @@ class LogConfig(BaseModel):
 class Persona(BaseModel):
     id: int
     age: int
+    avatar: str
     gender: str
+    name: str
     occupation: str
     education_level: int
     income_level: int
