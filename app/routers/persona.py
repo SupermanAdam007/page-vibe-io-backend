@@ -25,4 +25,6 @@ async def values():
         "predefined_decision_making_factors": constants.predefined_decision_making_factors,
         "predefined_communication_styles": constants.predefined_communication_styles,
         "predefined_user_experience_expectations": constants.predefined_user_experience_expectations,
+        "predefined_personas": constants.predefined_personas,
+        "predefined_questions": constants.predefined_questions,
     }
