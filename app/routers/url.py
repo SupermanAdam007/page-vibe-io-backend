@@ -3,8 +3,7 @@ from urllib.parse import unquote
 from fastapi import APIRouter, HTTPException
 import validators
 
-from app.config import settings
-from app import models, constants
+from app import constants
 from app.lib.url_parse import get_rated_elements
 from app.lib.chat import chat_process_url
 
@@ -20,12 +19,16 @@ async def process_url(url: str):
     if not url_valid:
         raise HTTPException(status_code=400, detail=f"Invalid URL: {url}")
 
-    rated_elements = get_rated_elements(url=unquoted_url, char_limit=2000)
+    rated_elements = "\n".join(
+        [str(x) for x in get_rated_elements(url=unquoted_url, char_limit=2500)]
+    )
     result = chat_process_url(
         url=unquoted_url,
         website_text=rated_elements,
-        persona=constants.predefined_personas[1],
+        persona=constants.predefined_personas[3],
         questions=constants.predefined_questions,
+        # model="gpt-4",
+        debug=True,
     )
 
     return {

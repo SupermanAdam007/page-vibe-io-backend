@@ -208,4 +208,6 @@ predefined_questions = [
     "Does the page align with your expectations or needs?",
     "How likely are you to revisit the page in the future?",
     "Do you feel the page effectively communicates its purpose or message?",
+    "What is your summary of your user experience from the page?",
+    "What score between 1-10 would you rate the page? - answer only that one number please",
 ]
