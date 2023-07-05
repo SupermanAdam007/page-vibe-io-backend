@@ -79,6 +79,7 @@ predefined_personas = [
         age=25,
         gender="Male",
         name="Adam",
+        description="Hey, I'm Adam, a tech-savvy digital marketer who values intuitive design and comprehensive functionality.",
         occupation="Digital Marketer",
         education_level=8,
         income_level=7,
@@ -106,6 +107,7 @@ predefined_personas = [
         age=70,
         gender="Female",
         name="Lisa",
+        description="Hi, I'm Lisa, a retired individual looking for a clean and trustworthy user experience at an affordable price.",
         occupation="Retired",
         education_level=4,
         income_level=5,
@@ -137,10 +139,11 @@ predefined_personas = [
         age=35,
         gender="Male",
         name="Peter",
+        description="Hey there, I'm Peter, a software engineer who loves innovation and seamless performance in user interfaces.",
         occupation="Software Engineer",
         education_level=9,
         income_level=9,
-        tech_proficiency=8,
+        tech_proficiency=10,
         user_experience_expectations={
             "ease_of_use": ["Intuitive"],
             "design_aesthetics": ["Modern"],
@@ -168,6 +171,7 @@ predefined_personas = [
         avatar="/personas/Work life balance-amico.png",
         gender="Female",
         name="Isabella",
+        description="Hi, I'm Isabella, a homemaker seeking a simple and customizable user experience with clear messaging and reliable support.",
         occupation="Homemaker",
         education_level=6,
         income_level=6,
@@ -196,6 +200,8 @@ predefined_personas = [
 ]
 
 predefined_questions = [
+    "What score between 1-10 would you rate the page?",
+    "What is your summary of your user experience from the page?",
     "What aspects of the page do you find appealing?",
     "What aspects of the page do you dislike or find problematic?",
     "Would you consider making a purchase on this page? If so, how much would you be willing to spend and why?",
@@ -216,6 +222,4 @@ predefined_questions = [
     "Does the page align with your expectations or needs?",
     "How likely are you to revisit the page in the future?",
     "Do you feel the page effectively communicates its purpose or message?",
-    "What is your summary of your user experience from the page?",
-    "What score between 1-10 would you rate the page? - answer only that one number please",
 ]

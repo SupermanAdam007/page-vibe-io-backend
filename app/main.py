@@ -8,7 +8,7 @@ import uvicorn
 
 from app.config import settings
 from app.models import LogConfig
-from app.routers import url, persona
+from app.routers import url, persona, constants
 
 if settings.PROD:
     app = FastAPI(docs_url=None, redoc_url=None)
@@ -20,7 +20,6 @@ print(f"Environment: {'Prod' if settings.PROD else 'Dev'}")
 dictConfig(LogConfig().dict())
 log = logging.getLogger("app")
 
-
 # Check if 'punkt' is already downloaded
 try:
     nltk.data.find("tokenizers/punkt")
@@ -29,9 +28,26 @@ except LookupError:
     log.info("NLTK tokenizers/punkt was not found, downloading.")
     nltk.download("punkt")
 
+# Check if 'vader_lexicon' is already downloaded
+try:
+    nltk.data.find("vader_lexicon")
+    log.info("NLTK vader_lexicon was found.")
+except LookupError:
+    log.info("NLTK vader_lexicon was not found, downloading.")
+    nltk.download("vader_lexicon")
+
+# Check if 'vader_lexicon' is already downloaded
+try:
+    nltk.data.find("cmudict")
+    log.info("NLTK cmudict was found.")
+except LookupError:
+    log.info("NLTK cmudict was not found, downloading.")
+    nltk.download("cmudict")
+
 
 app.include_router(url.router)
 app.include_router(persona.router)
+app.include_router(constants.router)
 
 app.add_middleware(
     CORSMiddleware,

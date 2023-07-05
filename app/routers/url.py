@@ -1,23 +1,33 @@
+import logging
+from typing import List
 from urllib.parse import unquote
 
 from fastapi import APIRouter, HTTPException
 import validators
 
-from app import constants
-from app.lib.url_parse import get_rated_elements
 from app.lib.chat import chat_process_url
-from app.models import Persona
+from app.lib.text_analysis import get_text_sentiment, get_text_readibility_and_complexity
+from app.lib.url_parse import get_rated_elements
+from app.models import Persona, SubmitUrlRequest
 
 router = APIRouter()
 
+log = logging.getLogger("app")
 
-@router.post("/url/process/{url}", responses={400: {"description": "Invalid URL"}})
-async def process_url(url: str, persona: Persona):
+
+@router.post("/url/process/", responses={400: {"description": "Invalid request"}})
+async def process_url(data: SubmitUrlRequest):
+    persona: Persona = data.persona
+    questions: List[str] = data.questions
+    url: str = data.url
     unquoted_url = unquote(url)
+
     url_valid = bool(validators.url(unquoted_url))
 
     if not url_valid:
-        raise HTTPException(status_code=400, detail=f"Invalid URL: {url}")
+        raise HTTPException(status_code=400, detail=f"Invalid URL: {unquoted_url}")
+
+    log.info(f"Processing url: {unquoted_url}")
 
     rated_elements = "\n".join(
         [str(x) for x in get_rated_elements(url=unquoted_url, char_limit=2500)]
@@ -26,18 +36,16 @@ async def process_url(url: str, persona: Persona):
         url=unquoted_url,
         website_text=rated_elements,
         persona=persona,
-        questions=constants.predefined_questions,
+        questions=questions,
         # model="gpt-4",
-        debug=True,
+        debug=False,
     )
 
-    return {
-        "questions_and_answers": result,
-    }
+    readibility, complexity = get_text_readibility_and_complexity(rated_elements)
 
-
-@router.get("/url/constants/")
-async def values():
     return {
-        "predefined_questions": constants.predefined_questions,
+        "answers": result,
+        "sentiment_score": get_text_sentiment(result),
+        "readibility": readibility,
+        "complexity": complexity,
     }
