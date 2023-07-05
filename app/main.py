@@ -8,7 +8,6 @@ import uvicorn
 
 from app.config import settings
 from app.models import LogConfig
-from app.routers import url, persona, constants
 
 if settings.PROD:
     app = FastAPI(docs_url=None, redoc_url=None)
@@ -45,6 +44,7 @@ except LookupError:
     nltk.download("cmudict")
 
 
+from app.routers import url, persona, constants
 app.include_router(url.router)
 app.include_router(persona.router)
 app.include_router(constants.router)
