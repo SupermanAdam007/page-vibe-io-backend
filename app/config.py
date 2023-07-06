@@ -7,7 +7,8 @@ class Settings(BaseSettings):
     PROD: bool = True
     origins = [
         "http://localhost:3000",
-        "https://walrus-app-eogao.ondigitalocean.app"
+        "https://walrus-app-eogao.ondigitalocean.app",
+        "https://pagevibe.io",
     ]
     DEBUG: bool = False
 
