@@ -5,6 +5,7 @@ from urllib.parse import unquote
 from fastapi import APIRouter, HTTPException
 import validators
 
+from app.config import settings
 from app.lib.chat import chat_process_url
 from app.lib.text_analysis import get_text_sentiment, get_text_readibility_and_complexity
 from app.lib.url_parse import get_rated_elements
@@ -38,7 +39,7 @@ async def process_url(data: SubmitUrlRequest):
         persona=persona,
         questions=questions,
         # model="gpt-4",
-        debug=False,
+        debug=settings.DEBUG,
     )
 
     readibility, complexity = get_text_readibility_and_complexity(rated_elements)
