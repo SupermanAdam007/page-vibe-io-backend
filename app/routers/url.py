@@ -16,7 +16,10 @@ router = APIRouter()
 log = logging.getLogger("app")
 
 
-@router.post("/url/process/", responses={400: {"description": "Invalid request"}})
+@router.post("/url/process/", responses={
+    400: {"description": "Invalid request"},
+    406: {"description": "Unable to read URL"}
+})
 async def process_url(data: SubmitUrlRequest):
     persona: Persona = data.persona
     questions: List[str] = data.questions
@@ -33,6 +36,10 @@ async def process_url(data: SubmitUrlRequest):
     rated_elements = "\n".join(
         [str(x) for x in get_rated_elements(url=unquoted_url, char_limit=2500)]
     )
+
+    if not rated_elements:
+        raise HTTPException(status_code=406, detail=f"Unable to read URL: {unquoted_url}")
+
     result = chat_process_url(
         url=unquoted_url,
         website_text=rated_elements,

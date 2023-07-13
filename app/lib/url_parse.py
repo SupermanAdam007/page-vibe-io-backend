@@ -3,6 +3,7 @@ from typing import List
 
 import requests
 from bs4 import BeautifulSoup
+from urllib3 import HTTPSConnectionPool
 
 from app.lib.text import filter_out_similar
 from app.lib.element import ElementInfo
@@ -118,7 +119,12 @@ def cut_list_under_limit(strings: List[ElementInfo], limit: int):
 
 
 def get_rated_elements(url: str, char_limit: int = 0) -> List[ElementInfo]:
-    response = requests.get(url)
+    try:
+        response = requests.get(url, timeout=5)
+    except requests.exceptions.ReadTimeout as e:
+        log.warning(e)
+        return []
+
     soup = BeautifulSoup(response.content, "html.parser")
 
     root_element = soup.find("body")
